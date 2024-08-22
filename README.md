@@ -1,38 +1,69 @@
-# Shut up!
+# be-quiet.el
 
-If you have an Emacs shell script, you most likely don't want output
-like this:
+The be-quiet.el Emacs package is designed to help you manage and minimize unwanted output in your Emacs environment. It is particularly useful for Emacs shell scripts or any context where you want to suppress or control the verbosity of Emacs.
 
 ```
 Loading vc-git...
 ```
 
-This package does it's best at shutting Emacs up!
+This package helps keep your Emacs output clean and quiet.
 
 ## Installation
 
-Add `shut-up` to your [Cask](https://github.com/cask/cask) file:
+### Install using straight
 
-```lisp
-(depends-on "shut-up")
+To install the `be-quiet` using `straight.el`:
+
+1. If you haven't already done so, [add the straight.el bootstrap code](https://github.com/radian-software/straight.el?tab=readme-ov-file#getting-started) to your init file.
+
+2. Add the following code to your Emacs init file:
 ```
+(use-package be-quiet
+  :ensure t
+  :straight (be-quiet
+             :type git
+             :host github
+             :repo "jamescherti/be-quiet.el"))
+```
+
+## License
+
+Copyright (C) 2024 [James Cherti](https://www.jamescherti.com)
+
+Copyright (C) 2013-2014 Johan Andersson
+
+Copyright (C) 2014-2015 Sebastian Wiesner
+
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with this program.
+
+## Links
+
+- [be-quiet.el @GitHub](https://github.com/jamescherti/be-quiet.el)
 
 ## Usage
 
-Use the `shut-up` macro to silence function calls:
+To silence specific function calls, use the be-quiet macro:
 
 ```lisp
 (let (output)
-  (shut-up
+  (be-quiet
     (message "Foo")
-    (setq output (shut-up-current-output)))
+    (setq output (be-quiet-current-output)))
   (message "This was the last message: %s" output))
 ```
 
-In non-interactive sessions, you can also use `shut-up-silence-emacs` to change
-some global Emacs settings to reduce output:
+In non-interactive sessions, you can further reduce output by using be-quiet-silence-emacs, which adjusts some global Emacs settings:
 
 ```lisp
 (when noninteractive
-  (shut-up-silence-emacs))
+  (setq dired-use-ls-dired nil)
+  (remove-hook 'find-file-hook 'vc-find-file-hook))
 ```
+
+## Links
+
+- https://github.com/jamescherti/be-quiet.el

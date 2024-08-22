@@ -1,10 +1,12 @@
-;;; shut-up-test.el --- Test suite for shut-up       -*- lexical-binding: t; -*-
+;;; be-quiet-test.el --- Test suite for be-quiet       -*- lexical-binding: t; -*-
 
+;; Copyright (C) 2024 James Cherti | https://www.jamescherti.com/contact/
 ;; Copyright (C) 2014, 2015  Sebastian Wiesner <swiesner@lunaryorn.com>
 
+;; Maintainer: James Cherti | https://www.jamescherti.com/contact/
 ;; Author: Sebastian Wiesner <swiesner@lunaryorn.com>
 ;; Maintainer: Johan Andersson <johan.rejeep@gmail.com>
-;; URL: http://github.com/rejeep/shut-up.el
+;; URL: https://github.com/jamescherti/be-quiet.el
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -21,14 +23,14 @@
 
 ;;; Commentary:
 
-;; Test shut-up
+;; Test be-quiet
 
 ;;; Code:
 
-(require 'shut-up)
+(require 'be-quiet)
 (require 's)
 
-(defun shut-up-test-message-shown-p (message)
+(defun be-quiet-test-message-shown-p (message)
   "Determine whether MESSAGE was shown in the messages buffer."
   (let ((pattern (concat "^" (regexp-quote message) "$")))
     (with-current-buffer "*Messages*"
@@ -36,59 +38,59 @@
       (goto-char (point-min))
       (re-search-forward pattern nil 'no-error)))))
 
-(ert-deftest shut-up/binds-the-sink-buffer-in-body ()
-  (shut-up
-    (should (bufferp shut-up-sink))
-    (should (buffer-live-p shut-up-sink))))
+(ert-deftest be-quiet/binds-the-sink-buffer-in-body ()
+  (be-quiet
+    (should (bufferp be-quiet-sink))
+    (should (buffer-live-p be-quiet-sink))))
 
-(ert-deftest shut-up/silences-message ()
+(ert-deftest be-quiet/silences-message ()
   (message "This message shall be visible")
-  (shut-up-test-message-shown-p "This message shall be visible")
-  (shut-up
+  (be-quiet-test-message-shown-p "This message shall be visible")
+  (be-quiet
     (message "This message shall be hidden")
     ;; Cannot use string equality because Emacs 24.3 prints message
     ;; "ad-handle-definition: `message' got redefined".
     (should (s-ends-with? "This message shall be hidden\n"
-                         (shut-up-current-output)))
-    (should-not (shut-up-test-message-shown-p "This message shall be hidden")))
+                         (be-quiet-current-output)))
+    (should-not (be-quiet-test-message-shown-p "This message shall be hidden")))
   ;; Test that `message' is properly restored
   (message "This message shall be visible again")
-  (shut-up-test-message-shown-p "This message shall be visible again"))
+  (be-quiet-test-message-shown-p "This message shall be visible again"))
 
-(ert-deftest shut-up/handles-message-with-nil-argument ()
-  (shut-up
+(ert-deftest be-quiet/handles-message-with-nil-argument ()
+  (be-quiet
     (message nil)
-    (should (s-blank? (shut-up-current-output)))))
+    (should (s-blank? (be-quiet-current-output)))))
 
-(ert-deftest shut-up/silences-princ ()
+(ert-deftest be-quiet/silences-princ ()
   (with-temp-buffer
     (let ((standard-output (current-buffer)))
       (princ "This text is visible. ")
       (should (string= "This text is visible. " (buffer-string)))
-      (shut-up
+      (be-quiet
         (princ "This text is hidden. ")
         ;; Cannot use string equality because Emacs 24.3 prints message
         ;; "ad-handle-definition: `message' got redefined".
         (should (s-ends-with? "This text is hidden. "
-                             (shut-up-current-output)))
+                             (be-quiet-current-output)))
         (should (string= "This text is visible. " (buffer-string))))
       (princ "This text is visible again.")
       (should (string= "This text is visible. This text is visible again."
                        (buffer-string))))))
 
-(ert-deftest shut-up/silences-write-region ()
+(ert-deftest be-quiet/silences-write-region ()
   (let ((emacs (concat invocation-directory invocation-name))
-        (shut-up (symbol-file 'shut-up 'defun))
-        (temp-file (make-temp-file "shut-up-test-")))
+        (be-quiet (symbol-file 'be-quiet 'defun))
+        (temp-file (make-temp-file "be-quiet-test-")))
     (with-temp-buffer
       ;; We must use a sub-process, because we have no way to intercept
       ;; `write-region' messages otherwise
       (call-process emacs nil t nil "-Q" "--batch"
-                    "-l" shut-up
+                    "-l" be-quiet
                     "--eval" (prin1-to-string
                               `(progn
                                  (message "Start")
-                                 (shut-up
+                                 (be-quiet
                                    (write-region "Silent world" nil ,temp-file))
                                  (message "Done"))))
       ;; Can not do strict equality because in Emacs-23 this message
@@ -96,45 +98,45 @@
       ;; "This `cl-labels' requires `lexical-binding' to be non-nil"
       (should (s-contains? "Start\n" (buffer-string)))
       (should (s-contains? "Done\n" (buffer-string)))
-      ;; Test that the overridden shut-up did it's work actually
+      ;; Test that the overridden be-quiet did it's work actually
       (with-temp-buffer
         (insert-file-contents temp-file)
         (should (string= "Silent world" (buffer-string)))))))
 
-(ert-deftest shut-up/kill-sink-buffer ()
-  (shut-up
-   (kill-buffer shut-up-sink)
+(ert-deftest be-quiet/kill-sink-buffer ()
+  (be-quiet
+   (kill-buffer be-quiet-sink)
    (message "bar")
-   (should (string= (shut-up-current-output) "")))
-  (shut-up
-   (kill-buffer shut-up-sink)
+   (should (string= (be-quiet-current-output) "")))
+  (be-quiet
+   (kill-buffer be-quiet-sink)
    (print "bar")
-   (should (string= (shut-up-current-output) "")))
-  (shut-up
-   (kill-buffer shut-up-sink)
-   (should (string= (shut-up-current-output) ""))))
+   (should (string= (be-quiet-current-output) "")))
+  (be-quiet
+   (kill-buffer be-quiet-sink)
+   (should (string= (be-quiet-current-output) ""))))
 
-(ert-deftest shut-up/ignore ()
+(ert-deftest be-quiet/ignore ()
   (with-temp-buffer
     (let ((standard-output (current-buffer)))
-      (shut-up
+      (be-quiet
         (princ "foo")
-        (should (s-ends-with? "foo" (shut-up-current-output)))))
+        (should (s-ends-with? "foo" (be-quiet-current-output)))))
     (should (string= (buffer-string) "")))
   (with-temp-buffer
-    (let ((shut-up-ignore t)
+    (let ((be-quiet-ignore t)
           (standard-output (current-buffer)))
-      (shut-up
+      (be-quiet
         (princ "foo")
-        (should-not (s-ends-with? "foo" (shut-up-current-output)))))
+        (should-not (s-ends-with? "foo" (be-quiet-current-output)))))
     (should (string= (buffer-string) "foo"))))
 
-(ert-deftest shut-up/message-return-value ()
-  (should (equal (shut-up (message "hi"))
+(ert-deftest be-quiet/message-return-value ()
+  (should (equal (be-quiet (message "hi"))
                  "hi"))
-  (should (equal (shut-up (message "hi %s" "something"))
+  (should (equal (be-quiet (message "hi %s" "something"))
                  "hi something")))
 
-(provide 'shut-up-test)
+(provide 'be-quiet-test)
 
-;;; shut-up-test.el ends here
+;;; be-quiet-test.el ends here

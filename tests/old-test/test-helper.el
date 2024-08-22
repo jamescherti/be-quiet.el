@@ -1,4 +1,4 @@
-;;; test-helper.el --- shut-up: Initialize test suite  -*- lexical-binding: t; -*-
+;;; test-helper.el --- be-quiet: Initialize test suite  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2014, 2015  Sebastian Wiesner <swiesner@lunaryorn.com>
 
@@ -26,8 +26,8 @@
 (require 's)
 (require 'f)
 
-;; Load shut-up from the source directory
+;; Load be-quiet from the source directory
 (let ((source-directory (locate-dominating-file (f-this-file) "Cask")))
-  (load (expand-file-name "shut-up" source-directory)))
+  (load (expand-file-name "be-quiet" source-directory)))
 
 ;;; test-helper.el ends here

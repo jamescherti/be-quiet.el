@@ -1,1 +1,3 @@
 /.cask
+flycheck_*
+*.elc
