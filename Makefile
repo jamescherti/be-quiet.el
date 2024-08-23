@@ -35,4 +35,4 @@ compile: cask
 
 .PHONY: test
 test: compile
-	cask emacs --batch -L . -L tests -l tests/test-be-quiet.el -f test-be-quiet
+    exec ert-runner
