@@ -48,7 +48,7 @@ effect.")
 
 ;; Preserve the original definition of `write-region'
 (defvar be-quiet-write-region-original (symbol-function 'write-region)
-  "Original shut up write region function.")
+  "Original write region function.")
 
 (defun be-quiet-write-region (start end filename
                                    &optional append visit lockname mustbenew)
@@ -109,7 +109,7 @@ Inside BODY, the buffer is bound to the lexical variable
 Changes to the variable `be-quiet-ignore' inside BODY does not
 have any affect."
   (declare (indent 0))
-  `(let ((be-quiet-sink (generate-new-buffer " *shutup*"))
+  `(let ((be-quiet-sink (generate-new-buffer " *bequiet*"))
          (inhibit-message t))
      (cl-labels ((be-quiet-current-output ()
                    (or (be-quiet-buffer-string be-quiet-sink) "")))
