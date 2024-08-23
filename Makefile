@@ -35,4 +35,4 @@ compile: cask
 
 .PHONY: test
 test: compile
-    exec ert-runner
+	cask exec ert-runner

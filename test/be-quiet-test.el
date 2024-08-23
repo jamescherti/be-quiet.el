@@ -137,12 +137,5 @@
   (should (equal (be-quiet (message "hi %s" "something"))
                  "hi something")))
 
-;; (defun test-be-quiet ()
-;;   "Test be-quiet."
-;;   (interactive)
-;;   ;; Testing: Only Melpazoid checks are currently implemented
-;;   ;; (see Makefile for details)
-;;   t)
-
-(provide 'test-be-quiet)
-;;; test-be-quiet.el ends here
+(provide 'be-quiet-test)
+;;; be-quiet-test.el ends here
