@@ -1,4 +1,4 @@
-# be-quiet.el
+# be-quiet.el - Emacs, be quiet!
 
 The be-quiet.el Emacs package is designed to help you manage and minimize unwanted output in your Emacs environment. It is particularly useful for Emacs shell scripts or any context where you want to suppress or control the verbosity of Emacs.
 
@@ -30,19 +30,13 @@ To install the `be-quiet` using `straight.el`:
 
 Copyright (C) 2024 [James Cherti](https://www.jamescherti.com)
 
-Copyright (C) 2013-2014 Johan Andersson
-
-Copyright (C) 2014-2015 Sebastian Wiesner
+(The `be-quiet` package is based on the shut-up package, originally developed by Johan Andersson and Sebastian Wiesner.)
 
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
 This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License along with this program.
-
-## Links
-
-- [be-quiet.el @GitHub](https://github.com/jamescherti/be-quiet.el)
 
 ## Usage
 
@@ -66,4 +60,4 @@ In non-interactive sessions, you can further reduce output by using be-quiet-sil
 
 ## Links
 
-- https://github.com/jamescherti/be-quiet.el
+- [be-quiet.el @GitHub](https://github.com/jamescherti/be-quiet.el)
