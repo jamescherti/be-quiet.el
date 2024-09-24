@@ -137,31 +137,33 @@
   (should (equal (be-quiet (message "hi %s" "something"))
                  "hi something")))
 
-;; (defun be-quiet/test-function-advice ()
-;;   "Display a test message."
-;;   (message "test"))
-;;
-;; (ert-deftest be-quiet/add-remove-advice ()
-;;   "Test adding and removing the `be-quiet' advice."
-;;
-;;   ;; Verify that no advice is present initially
-;;   (let ((advice (get #'be-quiet/test-function-advice 'advice)))
-;;     (should (equal (assq :around advice) nil)))
-;;
-;;   ;; Add the be-quiet advice
-;;   (be-quiet-advice-add #'be-quiet/test-function-advice)
-;;
-;;   ;; Verify that the advice has been added and is the correct advice
-;;   (let ((advice (get #'be-quiet/test-function-advice 'advice)))
-;;     ;; (should (not (equal (assq :around advice) nil)))
-;;     (should (eq (cadr (assq :around advice)) #'be-quiet--around-advice)))
-;;
-;;   ;; Remove the be-quiet advice
-;;   (be-quiet-advice-remove #'be-quiet/test-function-advice)
-;;
-;;   ;; Verify that the advice has been removed
-;;   (let ((advice (get #'be-quiet/test-function-advice 'advice)))
-;;     (should (equal (assq :around advice) nil))))
+(defun be-quiet/test-function-advice ()
+  "Display a test message."
+  (message "test"))
+
+(ert-deftest be-quiet/add-remove-advice ()
+  "Test adding and removing the `be-quiet' advice."
+
+  ;; Verify that no advice is present initially
+  (should (equal (advice-member-p #'be-quiet--around-advice
+                                  #'be-quiet/test-function-advice)
+                 nil))
+
+  ;; Add the be-quiet advice
+  (be-quiet-advice-add #'be-quiet/test-function-advice)
+
+  ;; Verify that the advice has been added and is the correct advice
+  (should (equal (advice-member-p #'be-quiet--around-advice
+                                  #'be-quiet/test-function-advice)
+                 nil))
+
+  ;; Remove the be-quiet advice
+  (be-quiet-advice-remove #'be-quiet/test-function-advice)
+
+  ;; Verify that the advice has been removed
+  (should (equal (advice-member-p #'be-quiet--around-advice
+                                  #'be-quiet/test-function-advice)
+                 nil)))
 
 (provide 'be-quiet-test)
 ;;; be-quiet-test.el ends here
