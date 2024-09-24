@@ -138,26 +138,30 @@
                  "hi something")))
 
 (defun be-quiet/test-function-advice ()
-  "Display a message."
+  "Display a test message."
   (message "test"))
 
 (ert-deftest be-quiet/add-remove-advice ()
-  "Test add and remove advice."
-  (let ((advice (get #'be-quiet/test-function-advice 'advice)))
-    ;; Advice is removed from be-quiet/test-function-advice function.
-    (should (equal (not (assq :around advice)) t)))
+  "Test adding and removing the `be-quiet' advice."
 
+  ;; Verify that no advice is present initially
+  (let ((advice (get #'be-quiet/test-function-advice 'advice)))
+    (should (not (assq :around advice))))
+
+  ;; Add the be-quiet advice
   (be-quiet-advice-add #'be-quiet/test-function-advice)
 
+  ;; Verify that the advice has been added and is the correct advice
   (let ((advice (get #'be-quiet/test-function-advice 'advice)))
-    ;; Advice is removed from be-quiet/test-function-advice function.
-    (should (equal (not (assq :around advice)) t)))
+    (should (assq :around advice))
+    (should (eq (cadr (assq :around advice)) #'be-quiet--around-advice)))
 
+  ;; Remove the be-quiet advice
   (be-quiet-advice-remove #'be-quiet/test-function-advice)
 
+  ;; Verify that the advice has been removed
   (let ((advice (get #'be-quiet/test-function-advice 'advice)))
-    ;; Advice is added to be-quiet/test-function-advice function.
-    (should (equal (assq :around advice) t))))
+    (should (not (assq :around advice)))))
 
 (provide 'be-quiet-test)
 ;;; be-quiet-test.el ends here
