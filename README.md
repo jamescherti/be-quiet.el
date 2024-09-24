@@ -56,6 +56,13 @@ For instance, to disable the message "Indentation setup for shell type bash" whe
 
 In this example, the `sh-set-shell` function will execute without displaying any messages.
 
+Here is another example to prevent `recentf` from showing messages during saving and cleanup:
+```lisp
+(with-eval-after-load "recentf"
+  (be-quiet-advice-add #'recentf-save-list)
+  (be-quiet-advice-add #'recentf-cleanup))
+```
+
 ## Frequently asked question
 
 ### Are there any other Emacs parameters that can help reduce the output?
