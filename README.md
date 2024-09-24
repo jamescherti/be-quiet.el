@@ -73,7 +73,7 @@ In non-interactive sessions, you can further reduce output by using be-quiet-sil
   (remove-hook 'find-file-hook 'vc-find-file-hook))
 ```
 
-### How to find what function to silence?
+### Identifying Functions to Silence in Emacs
 
 You can assign a regular expression to the variable `debug-on-message` by adding the following line early in your Emacs init files. This will cause Emacs to invoke the debugger when a matching message is displayed during Emacs startup:
 ```lisp
