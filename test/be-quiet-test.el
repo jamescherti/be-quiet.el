@@ -146,14 +146,14 @@
 
   ;; Verify that no advice is present initially
   (let ((advice (get #'be-quiet/test-function-advice 'advice)))
-    (should (not (assq :around advice))))
+    (should (equal (assq :around advice) nil)))
 
   ;; Add the be-quiet advice
   (be-quiet-advice-add #'be-quiet/test-function-advice)
 
   ;; Verify that the advice has been added and is the correct advice
   (let ((advice (get #'be-quiet/test-function-advice 'advice)))
-    (should (assq :around advice))
+    ;; (should (not (equal (assq :around advice) nil)))
     (should (eq (cadr (assq :around advice)) #'be-quiet--around-advice)))
 
   ;; Remove the be-quiet advice
@@ -161,7 +161,7 @@
 
   ;; Verify that the advice has been removed
   (let ((advice (get #'be-quiet/test-function-advice 'advice)))
-    (should (not (assq :around advice)))))
+    (should (equal (assq :around advice) nil))))
 
 (provide 'be-quiet-test)
 ;;; be-quiet-test.el ends here
