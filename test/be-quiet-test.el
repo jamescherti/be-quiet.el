@@ -153,9 +153,9 @@
   (be-quiet-advice-add #'be-quiet/test-function-advice)
 
   ;; Verify that the advice has been added and is the correct advice
-  (should (equal (advice-member-p #'be-quiet--around-advice
-                                  #'be-quiet/test-function-advice)
-                 nil))
+  (should (not (equal (advice-member-p #'be-quiet--around-advice
+                                       #'be-quiet/test-function-advice)
+                      nil)))
 
   ;; Remove the be-quiet advice
   (be-quiet-advice-remove #'be-quiet/test-function-advice)
