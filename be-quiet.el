@@ -6,7 +6,7 @@
 
 ;; Maintainer: James Cherti | https://www.jamescherti.com/contact/
 ;; Author: Johan Andersson <johan.rejeep@gmail.com>
-;; Package-Requires: ((cl-lib "0.3") (emacs "24"))
+;; Package-Requires: ((cl-lib "0.3") (emacs "24.4"))
 ;; Keywords: convenience
 ;; Version: 1.0.0
 ;; URL: https://github.com/jamescherti/be-quiet.el
@@ -99,14 +99,14 @@ suppressed:
 - Output to `standard-output', such as that produced by functions like
   `print', `princ', and others.
 
-Inside BODY, the buffer is bound to the lexical variable `shut-up-sink'.
-Additionally provide a lexical function `shut-up-current-output', which returns
-the current contents of `shut-up-sink' when called with no arguments.
+Inside BODY, the buffer is bound to the lexical variable `be-quiet-sink'.
+Additionally provide a lexical function `be-quiet-current-output', which returns
+the current contents of `be-quiet-sink' when called with no arguments.
 
 Changes to the variable `be-quiet-ignore' inside BODY have no effect on output
 suppression."
   (declare (indent 0))
-  `(let ((be-quiet-sink (generate-new-buffer " *shutup*"))
+  `(let ((be-quiet-sink (generate-new-buffer " *bequiet*"))
          (inhibit-message t))
      (cl-labels ((be-quiet-current-output ()
                    (or (be-quiet-buffer-string be-quiet-sink) "")))
@@ -130,6 +130,20 @@ suppression."
                ,@body)
            (and (buffer-name be-quiet-sink)
                 (kill-buffer be-quiet-sink)))))))
+
+(defun be-quiet--around-advice (orig-fn &rest args)
+  "Advise function to suppress any output of the ORIG-FN function.
+ARGS are the ORIG_-FN function arguments."
+  (be-quiet
+    (apply orig-fn args)))
+
+(defun be-quiet-advice-add (fn)
+  "Advise the the FN function to be quiet."
+  (advice-add fn :around #'be-quiet--around-advice))
+
+(defun be-quiet-advice-remove (fn)
+  "Remove silence advice from the FN function."
+  (advice-remove fn #'be-quiet--around-advice))
 
 (provide 'be-quiet)
 

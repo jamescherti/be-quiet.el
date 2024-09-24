@@ -3,7 +3,7 @@
 ![License](https://img.shields.io/github/license/jamescherti/be-quiet.el)
 ![](https://raw.githubusercontent.com/jamescherti/be-quiet.el/master/.images/made-for-gnu-emacs.svg)
 
-The be-quiet.el Emacs package is designed to help you manage and minimize unwanted output in your Emacs environment. It is particularly useful for Emacs shell scripts or any context where you want to suppress or control the verbosity of Emacs.
+The `be-quiet` Emacs package is designed to help you manage and minimize unwanted output in your Emacs environment. It is particularly useful for any context where you want to suppress or control the verbosity of Emacs.
 
 ```
 Loading vc-git...
@@ -29,6 +29,45 @@ To install the `be-quiet` using `straight.el`:
              :repo "jamescherti/be-quiet.el"))
 ```
 
+## Usage
+
+### The be-quiet macro
+
+Use the be-quiet macro to silence specific function calls while still being able to capture their output. For example:
+
+```lisp
+(let (output) (be-quiet (message "Foo")
+                        (setq output (be-quiet-current-output)))
+  (message "This was the last message: %s" output))
+```
+
+In this example, the message "Foo" is silenced, but its output is captured and stored in the variable output.
+
+
+### The be-quiet-advice-add function
+
+To prevent certain functions from generating output, use the `be-quiet-advice-add` function.
+
+For instance, to disable the message "Indentation setup for shell type bash" when `sh-set-shell` is called:
+``` lisp
+(with-eval-after-load "sh-mode"
+  (be-quiet-advice-add #'sh-set-shell))
+```
+
+In this example, the `sh-set-shell` function will execute without displaying any messages.
+
+## Frequently asked question
+
+### Are there any other Emacs parameters that can help reduce the output?
+
+In non-interactive sessions, you can further reduce output by using be-quiet-silence-emacs, which adjusts some global Emacs settings:
+
+```lisp
+(when noninteractive
+  (setq dired-use-ls-dired nil)
+  (remove-hook 'find-file-hook 'vc-find-file-hook))
+```
+
 ## License
 
 Copyright (C) 2024 [James Cherti](https://www.jamescherti.com)
@@ -40,26 +79,6 @@ This program is free software: you can redistribute it and/or modify it under th
 This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License along with this program.
-
-## Usage
-
-To silence specific function calls, use the be-quiet macro:
-
-```lisp
-(let (output)
-  (be-quiet
-    (message "Foo")
-    (setq output (be-quiet-current-output)))
-  (message "This was the last message: %s" output))
-```
-
-In non-interactive sessions, you can further reduce output by using be-quiet-silence-emacs, which adjusts some global Emacs settings:
-
-```lisp
-(when noninteractive
-  (setq dired-use-ls-dired nil)
-  (remove-hook 'find-file-hook 'vc-find-file-hook))
-```
 
 ## Links
 
