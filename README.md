@@ -1,4 +1,4 @@
-# be-quiet.el - Keep your Emacs output clean and quiet
+# be-quiet.el - Emacs, be quiet!
 ![Build Status](https://github.com/jamescherti/easysession.el/actions/workflows/ci.yml/badge.svg)
 ![License](https://img.shields.io/github/license/jamescherti/be-quiet.el)
 ![](https://raw.githubusercontent.com/jamescherti/be-quiet.el/master/.images/made-for-gnu-emacs.svg)
