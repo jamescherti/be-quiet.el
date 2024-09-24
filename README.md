@@ -33,8 +33,14 @@ To install the `be-quiet` using `straight.el`:
 
 ### The be-quiet macro
 
-Use the be-quiet macro to silence specific function calls while still being able to capture their output. For example:
+The simplest way to use the `be-quiet` macro is as follows:
+``` lisp
+(be-quiet
+  (message "You will not see this message")
+  (message "You will also not see this message"))
+```
 
+The `be-quiet` macro silences specific function calls while allowing you to capture their output. For example:
 ```lisp
 (let (output) (be-quiet (message "Foo")
                         (setq output (be-quiet-current-output)))
@@ -42,7 +48,6 @@ Use the be-quiet macro to silence specific function calls while still being able
 ```
 
 In this example, the message "Foo" is silenced, but its output is captured and stored in the variable output.
-
 
 ### The be-quiet-advice-add function
 
@@ -54,7 +59,7 @@ For instance, to disable the message "Indentation setup for shell type bash" whe
   (be-quiet-advice-add #'sh-set-shell))
 ```
 
-In this example, the `sh-set-shell` function will execute without displaying any messages.
+In this example, calling the `sh-set-shell` function will execute as usual without displaying any messages.
 
 Here is another example to prevent `recentf` from showing messages during saving and cleanup:
 ```lisp
