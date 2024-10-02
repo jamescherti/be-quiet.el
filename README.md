@@ -48,8 +48,7 @@ To prevent certain functions from generating output, use the `be-quiet-advice-ad
 
 For instance, to disable the message "Indentation setup for shell type bash" when `sh-set-shell` is called:
 ``` lisp
-(with-eval-after-load "sh-mode"
-  (be-quiet-advice-add #'sh-set-shell))
+(be-quiet-advice-add #'sh-set-shell)
 ```
 
 In this example, calling the `sh-set-shell` function will execute as usual without displaying any messages.
