@@ -81,7 +81,7 @@ You can assign a regular expression to the variable `debug-on-message` by adding
 
 ## License
 
-- Copyright (C) 2024 [James Cherti](https://www.jamescherti.com)
+- Copyright (C) 2024-2025 [James Cherti](https://www.jamescherti.com)
 - Copyright (C) 2013-2014 Johan Andersson
 - Copyright (C) 2014-2015 Sebastian Wiesner
 
