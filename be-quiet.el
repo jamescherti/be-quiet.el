@@ -8,7 +8,7 @@
 ;; Author: Johan Andersson <johan.rejeep@gmail.com>
 ;; Package-Requires: ((cl-lib "0.3") (emacs "24.4"))
 ;; Keywords: convenience
-;; Version: 1.0.0
+;; Version: 1.0.1
 ;; URL: https://github.com/jamescherti/be-quiet.el
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 
