@@ -118,10 +118,10 @@ If BUFFER is not live, do nothing."
   'be-quiet--insert-to-buffer
   "Renamed to `be-quiet--insert-to-buffer'.")
 
-(make-obsolete 'be-quiet--buffer-string 'be-quiet--buffer-string "1.0.2")
-(make-obsolete 'be-quiet--write-region 'be-quiet--write-region "1.0.2")
-(make-obsolete 'be-quiet--load 'be-quiet--load "1.0.2")
-(make-obsolete 'be-quiet--insert-to-buffer 'be-quiet--insert-to-buffer "1.0.2")
+(make-obsolete 'be-quiet-buffer-string 'be-quiet--buffer-string "1.0.2")
+(make-obsolete 'be-quiet-write-region 'be-quiet--write-region "1.0.2")
+(make-obsolete 'be-quiet-load 'be-quiet--load "1.0.2")
+(make-obsolete 'be-quiet-insert-to-buffer 'be-quiet--insert-to-buffer "1.0.2")
 
 ;;; Functions
 
