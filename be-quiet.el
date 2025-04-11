@@ -113,7 +113,7 @@ the current contents of `be-quiet-sink' when called with no arguments.
 Changes to the variable `be-quiet-ignore' inside BODY have no effect on output
 suppression."
   (declare (indent 0))
-  `(let ((be-quiet-sink (generate-new-buffer " *bequiet*"))
+  `(let ((be-quiet-sink (generate-new-buffer " *be-quiet*"))
          (inhibit-message t))
      (cl-labels ((be-quiet-current-output ()
                    (or (be-quiet--buffer-string be-quiet-sink) "")))
