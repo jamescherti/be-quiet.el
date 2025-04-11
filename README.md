@@ -96,16 +96,6 @@ Here is another example to prevent `recentf` from showing messages during saving
 
 ## Frequently asked question
 
-### Are there any other Emacs parameters that can help reduce the output?
-
-In non-interactive sessions, you can further reduce output by using be-quiet-silence-emacs, which adjusts some global Emacs settings:
-
-```elisp
-(when noninteractive
-  (setq dired-use-ls-dired nil)
-  (remove-hook 'find-file-hook 'vc-find-file-hook))
-```
-
 ### Identifying Functions to Silence in Emacs
 
 You can assign a regular expression to the variable `debug-on-message` by adding the following line early in your Emacs init files. This will cause Emacs to invoke the debugger when a matching message is displayed during Emacs startup:
