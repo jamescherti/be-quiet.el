@@ -85,9 +85,7 @@ The *be-quiet* package offers the same core functionality as *shut-up*, but with
 
 - Provides new functions: `be-quiet-advice-add` and `be-quiet-advice-remove`
 - Ensures internal helper functions are properly marked as internal
-- Fixes byte-compiler warnings and other issues
-- Improves docstrings for clarity and completeness
-- Adheres to Emacs Lisp naming conventions throughout the codebase
+- Fixes byte-compiler warnings and other issues and improves docstrings for clarity and completeness
 
 ## License
 
