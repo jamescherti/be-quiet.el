@@ -143,7 +143,7 @@
 (ert-deftest be-quiet/add-remove-advice ()
   "Test adding and removing the `be-quiet' advice."
   ;; Verify that no advice is present initially
-  (should (equal (advice-member-p #'be-quiet--around-advice
+  (should (equal (advice-member-p #'be-quiet-funcall
                                   #'be-quiet/test-function-advice)
                  nil))
 
@@ -151,7 +151,7 @@
   (be-quiet-advice-add #'be-quiet/test-function-advice)
 
   ;; Verify that the advice has been added and is the correct advice
-  (should (not (equal (advice-member-p #'be-quiet--around-advice
+  (should (not (equal (advice-member-p #'be-quiet-funcall
                                        #'be-quiet/test-function-advice)
                       nil)))
 
@@ -159,7 +159,7 @@
   (be-quiet-advice-remove #'be-quiet/test-function-advice)
 
   ;; Verify that the advice has been removed
-  (should (equal (advice-member-p #'be-quiet--around-advice
+  (should (equal (advice-member-p #'be-quiet-funcall
                                   #'be-quiet/test-function-advice)
                  nil)))
 
