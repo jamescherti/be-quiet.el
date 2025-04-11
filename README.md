@@ -112,6 +112,7 @@ The *be-quiet* package offers the same core functionality as *shut-up*, but with
 - Fixes byte-compiler warnings and other issues and improves docstrings for clarity and completeness
 - Fix bug: Kill the temporary buffer created by the `be-quiet` macro when `be-quiet-disable` is non-nil (unlike `shut-up`, which leaves the buffer behind when `shut-up-ignore` is non-nil)
 - Fix bug: Do not set `inhibit-message` to `t` when `be-quiet-disable` is non-nil (unlike `shut-up`, which sets it regardless of the value of `shut-up-ignore`)
+- Replaced `buffer-name` with `buffer-live-p` to ensure that the `be-quiet` buffer is still valid before performing operations like `kill-buffer`.
 
 ## License
 

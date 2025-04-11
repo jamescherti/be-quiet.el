@@ -139,9 +139,9 @@ the current contents of `be-quiet-sink' when called with no arguments."
                      (be-quiet-current-output ()
                        ;; Backward compatibility
                        (be-quiet-output)))
-           (let ((inhibit-message t))
-             (if be-quiet-disable
-                 (progn ,@body)
+           (if be-quiet-disable
+               (progn ,@body)
+             (let ((inhibit-message t))
                (cl-letf
                    ;; Override `standard-output', for `print'
                    ((standard-output
@@ -158,10 +158,12 @@ the current contents of `be-quiet-sink' when called with no arguments."
                            text))))
 
                     ;; Override `write-region'
-                    ((symbol-function 'write-region) #'be-quiet--write-region)
+                    ((symbol-function 'write-region)
+                     #'be-quiet--write-region)
 
                     ;; Override `load'
-                    ((symbol-function 'load) #'be-quiet--load))
+                    ((symbol-function 'load)
+                     #'be-quiet--load))
                  ,@body))))
        (and (buffer-live-p be-quiet-sink)
             (kill-buffer be-quiet-sink)))))
