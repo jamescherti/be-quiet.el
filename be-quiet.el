@@ -41,6 +41,8 @@
 (unless (boundp 'inhibit-message)
   (setq inhibit-message nil))
 
+;;; Variables
+
 (defvar be-quiet-ignore nil
   "When non-nil, do not hide output inside `be-quiet'.
 Changes to this variable inside a `be-quiet' block has no effect.")
@@ -51,8 +53,10 @@ Changes to this variable inside a `be-quiet' block has no effect.")
 (defvar be-quiet--load-original (symbol-function 'load)
   "Original load function.")
 
-(defun be-quiet-write-region (start end filename
-                                    &optional append visit lockname mustbenew)
+;;; Internal functions
+
+(defun be-quiet--write-region (start end filename
+                                     &optional append visit lockname mustbenew)
   "Like `write-region', but try to suppress any messages.
 START, END, FILENAME are the mandatory arguments.
 APPEND, VISIT, LOCKNAME, MUSTBENEW are optional."
@@ -64,13 +68,13 @@ APPEND, VISIT, LOCKNAME, MUSTBENEW are optional."
   (funcall be-quiet--write-region-original start end filename
            append visit lockname mustbenew))
 
-(defun be-quiet-load (file &optional noerror _nomessage nosuffix must-suffix)
+(defun be-quiet--load (file &optional noerror _nomessage nosuffix must-suffix)
   "Like `load', but try to be quiet about it.
 FILE is mandatory and NOERROR, _NOMESSAGE, NOSUFFIX, MUST-SUFFIX are optional."
   (funcall be-quiet--load-original
            file noerror :nomessage nosuffix must-suffix))
 
-(defun be-quiet-buffer-string (buffer)
+(defun be-quiet--buffer-string (buffer)
   "Get the contents of BUFFER.
 
 When BUFFER is alive, return its contents without properties.
@@ -79,7 +83,7 @@ Otherwise return nil."
     (with-current-buffer buffer
       (buffer-substring-no-properties (point-min) (point-max)))))
 
-(defun be-quiet-insert-to-buffer (object buffer)
+(defun be-quiet--insert-to-buffer (object buffer)
   "Insert OBJECT into BUFFER.
 If BUFFER is not live, do nothing."
   (when (buffer-live-p buffer)
@@ -88,6 +92,14 @@ If BUFFER is not live, do nothing."
         (character (insert-char object 1))
         (string (insert object))
         (t (princ object #'insert-char))))))
+
+(defun be-quiet--around-advice (orig-fn &rest args)
+  "Advise function to suppress any output of the ORIG-FN function.
+ARGS are the ORIG_-FN function arguments."
+  (be-quiet
+    (apply orig-fn args)))
+
+;;; Functions
 
 ;;;###autoload
 (defmacro be-quiet (&rest body)
@@ -110,7 +122,7 @@ suppression."
   `(let ((be-quiet-sink (generate-new-buffer " *bequiet*"))
          (inhibit-message t))
      (cl-labels ((be-quiet-current-output ()
-                   (or (be-quiet-buffer-string be-quiet-sink) "")))
+                   (or (be-quiet--buffer-string be-quiet-sink) "")))
        (if be-quiet-ignore
            (progn ,@body)
          (unwind-protect
@@ -118,30 +130,26 @@ suppression."
              ;; monkey-patch `message'
              (cl-letf ((standard-output
                         (lambda (char)
-                          (be-quiet-insert-to-buffer char be-quiet-sink)))
+                          (be-quiet--insert-to-buffer char be-quiet-sink)))
                        ((symbol-function 'message)
                         (lambda (fmt &rest args)
                           (when fmt
                             (let ((text (apply #'format fmt args)))
-                              (be-quiet-insert-to-buffer (concat text "\n")
-                                                         be-quiet-sink)
+                              (be-quiet--insert-to-buffer (concat text "\n")
+                                                          be-quiet-sink)
                               text))))
-                       ((symbol-function 'write-region) #'be-quiet-write-region)
-                       ((symbol-function 'load) #'be-quiet-load))
+                       ((symbol-function 'write-region) #'be-quiet--write-region)
+                       ((symbol-function 'load) #'be-quiet--load))
                ,@body)
            (and (buffer-name be-quiet-sink)
                 (kill-buffer be-quiet-sink)))))))
 
-(defun be-quiet--around-advice (orig-fn &rest args)
-  "Advise function to suppress any output of the ORIG-FN function.
-ARGS are the ORIG_-FN function arguments."
-  (be-quiet
-    (apply orig-fn args)))
-
+;;;###autoload
 (defun be-quiet-advice-add (fn)
   "Advise the the FN function to be quiet."
   (advice-add fn :around #'be-quiet--around-advice))
 
+;;;###autoload
 (defun be-quiet-advice-remove (fn)
   "Remove silence advice from the FN function."
   (advice-remove fn #'be-quiet--around-advice))
