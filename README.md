@@ -79,6 +79,16 @@ You can assign a regular expression to the variable `debug-on-message` by adding
 (setq debug-on-message "Regular expression")
 ```
 
+### What is the difference between be-quiet and shut-up?
+
+The *be-quiet* package offers the same core functionality as *shut-up*, but with several enhancements:
+
+- Provides new functions: `be-quiet-advice-add` and `be-quiet-advice-remove`
+- Ensures internal helper functions are properly marked as internal
+- Fixes byte-compiler warnings and other issues
+- Improves docstrings for clarity and completeness
+- Adheres to Emacs Lisp naming conventions throughout the codebase
+
 ## License
 
 - Copyright (C) 2024-2025 [James Cherti](https://www.jamescherti.com)
