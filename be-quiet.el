@@ -43,9 +43,16 @@
 
 ;;; Variables
 
+(defgroup be-quiet nil
+  "Emacs, be quiet!"
+  :group 'be-quiet
+  :prefix "be-quiet-")
+
 (defvar be-quiet-ignore nil
   "When non-nil, do not hide output inside `be-quiet'.
 Changes to this variable inside a `be-quiet' block has no effect.")
+
+;;; Internal variables
 
 (defvar be-quiet--write-region-original (symbol-function 'write-region)
   "Original write region function.")
