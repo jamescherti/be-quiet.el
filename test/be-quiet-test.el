@@ -164,5 +164,21 @@
                                   #'be-quiet/test-function-advice)
                  nil)))
 
+(ert-deftest be-quiet/funcall ()
+  "Test `be-quiet-funcall'."
+  (message "world4hello5")
+  (be-quiet-funcall
+   (lambda() (message "Hello1world2")))
+  (with-current-buffer "*Messages*"
+    (should
+     (save-excursion
+       (goto-char (point-min))
+       (re-search-forward "Hello1world2" nil t)))
+
+    (should-not
+     (save-excursion
+       (goto-char (point-min))
+       (re-search-forward "world4hello5" nil t)))))
+
 (provide 'be-quiet-test)
 ;;; be-quiet-test.el ends here
