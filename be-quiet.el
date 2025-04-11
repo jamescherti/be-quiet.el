@@ -8,7 +8,7 @@
 ;; Author: Johan Andersson <johan.rejeep@gmail.com>
 ;; Package-Requires: ((cl-lib "0.3") (emacs "24.4"))
 ;; Keywords: convenience
-;; Version: 1.0.1
+;; Version: 1.0.2
 ;; URL: https://github.com/jamescherti/be-quiet.el
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -27,7 +27,7 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with GNU Emacs; see the file COPYING.  If not, write to the
 ;; Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
-;; Boston, MA 02110-1301, USA.
+;; Boston, MA 021.0.2301, USA.
 
 ;;; Commentary:
 ;; The be-quiet Emacs package helps manage and minimize unwanted output in your
