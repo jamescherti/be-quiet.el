@@ -102,22 +102,14 @@ If BUFFER is not live, do nothing."
 
 ;;; Obsolete variables
 
-(defalias 'be-quiet-buffer-string
-  'be-quiet--buffer-string
+(defalias 'be-quiet-buffer-string 'be-quiet--buffer-string
   "Renamed to `be-quiet--buffer-string'.")
-
-(defalias 'be-quiet-write-region
-  'be-quiet--write-region
+(defalias 'be-quiet-write-region 'be-quiet--write-region
   "Renamed to `be-quiet--write-region'.")
-
-(defalias 'be-quiet-load
-  'be-quiet--load
+(defalias 'be-quiet-load 'be-quiet--load
   "Renamed to `be-quiet--load'.")
-
-(defalias 'be-quiet-insert-to-buffer
-  'be-quiet--insert-to-buffer
+(defalias 'be-quiet-insert-to-buffer 'be-quiet--insert-to-buffer
   "Renamed to `be-quiet--insert-to-buffer'.")
-
 (make-obsolete 'be-quiet-buffer-string 'be-quiet--buffer-string "1.0.2")
 (make-obsolete 'be-quiet-write-region 'be-quiet--write-region "1.0.2")
 (make-obsolete 'be-quiet-load 'be-quiet--load "1.0.2")
