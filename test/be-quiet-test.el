@@ -142,7 +142,6 @@
 
 (ert-deftest be-quiet/add-remove-advice ()
   "Test adding and removing the `be-quiet' advice."
-
   ;; Verify that no advice is present initially
   (should (equal (advice-member-p #'be-quiet--around-advice
                                   #'be-quiet/test-function-advice)
@@ -170,12 +169,12 @@
   (be-quiet-funcall
    (lambda() (message "Hello1world2")))
   (with-current-buffer "*Messages*"
-    (should
+    (should-not
      (save-excursion
        (goto-char (point-min))
        (re-search-forward "Hello1world2" nil t)))
 
-    (should-not
+    (should
      (save-excursion
        (goto-char (point-min))
        (re-search-forward "world4hello5" nil t)))))
