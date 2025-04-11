@@ -58,7 +58,7 @@ doom sync
 
 ## Usage
 
-### The be-quiet macro
+### be-quiet (macro)
 
 The simplest way to use the `be-quiet` macro is as follows:
 ```elisp
@@ -76,7 +76,7 @@ The `be-quiet` macro silences specific function calls while allowing you to capt
 
 In this example, the message "Foo" is silenced, but its output is captured and stored in the variable output.
 
-### The be-quiet-advice-add function
+### be-quiet-advice-add (function)
 
 To prevent certain functions from generating output, use the `be-quiet-advice-add` function.
 
@@ -94,7 +94,7 @@ Here is another example to prevent `recentf` from showing messages during saving
   (be-quiet-advice-add #'recentf-cleanup))
 ```
 
-### The `be-quiet-funcall` function
+### be-quiet-funcall (function)
 
 Use `be-quiet-funcall` when you want to invoke a function while suppressing all output, including messages and printed text. For instance, to call `message` without displaying anything:
 
