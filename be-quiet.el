@@ -1,11 +1,10 @@
 ;;; be-quiet.el --- Be quiet!  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2024-2025 James Cherti | https://www.jamescherti.com/contact/
-;; Copyright (C) 2013-2014 Johan Andersson
-;; Copyright (C) 2014-2015 Sebastian Wiesner <swiesner@lunaryorn.com>
+;; Copyright (C) 2013-2014 Johan Andersson <johan.rejeep@gmail.com>
+;; Copyright (C) 2014, 2015  Sebastian Wiesner <swiesner@lunaryorn.com>
 
-;; Maintainer: James Cherti | https://www.jamescherti.com/contact/
-;; Author: Johan Andersson <johan.rejeep@gmail.com>
+;; Author: James Cherti | https://www.jamescherti.com/contact/
 ;; Package-Requires: ((cl-lib "0.3") (emacs "24.4"))
 ;; Keywords: convenience
 ;; Version: 1.0.2

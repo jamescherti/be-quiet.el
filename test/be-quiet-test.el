@@ -1,29 +1,28 @@
 ;;; be-quiet-test.el --- Test suite for be-quiet       -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2024-2025 James Cherti | https://www.jamescherti.com/contact/
+;; Copyright (C) 2013-2014 Johan Andersson <johan.rejeep@gmail.com>
 ;; Copyright (C) 2014, 2015  Sebastian Wiesner <swiesner@lunaryorn.com>
 
-;; Maintainer: James Cherti | https://www.jamescherti.com/contact/
-;; Author: Sebastian Wiesner <swiesner@lunaryorn.com>
-;; Maintainer: Johan Andersson <johan.rejeep@gmail.com>
+;; Author: James Cherti | https://www.jamescherti.com/contact/
 ;; URL: https://github.com/jamescherti/be-quiet.el
 
-;; This program is free software; you can redistribute it and/or modify
+;; This file is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
-;; the Free Software Foundation, either version 3 of the License, or
-;; (at your option) any later version.
+;; the Free Software Foundation; either version 2, or (at your option)
+;; any later version.
 
-;; This program is distributed in the hope that it will be useful,
+;; This file is distributed in the hope that it will be useful,
 ;; but WITHOUT ANY WARRANTY; without even the implied warranty of
 ;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ;; GNU General Public License for more details.
 
 ;; You should have received a copy of the GNU General Public License
-;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
+;; along with GNU Emacs.  If not, see <https://www.gnu.org/licenses/>.
 
 ;;; Commentary:
 
-;; Test be-quiet
+;; Test the be-quiet package
 
 ;;; Code:
 
