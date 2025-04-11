@@ -7,19 +7,53 @@ The `be-quiet` Emacs package helps manage and minimize unwanted output in your E
 
 ## Installation
 
-### Install with straight
+### Emacs: Install with straight (Emacs version < 30)
 
-To install `be-quiet` with `straight.el`:
+To install *be-quiet* with `straight.el`:
 
-1. If you haven't already done so, [add the straight.el bootstrap code](https://github.com/radian-software/straight.el?tab=readme-ov-file#getting-started) to your init file.
-2. Add the following code to your Emacs init file:
-```
+1. It if hasn't already been done, [add the straight.el bootstrap code](https://github.com/radian-software/straight.el?tab=readme-ov-file#getting-started) to your init file.
+2. Add the following code to the Emacs init file:
+```emacs-lisp
 (use-package be-quiet
   :ensure t
   :straight (be-quiet
              :type git
              :host github
              :repo "jamescherti/be-quiet.el"))
+```
+
+### Emacs: Installing with use-package and :vc (Built-in feature in Emacs version >= 30)
+
+To install *be-quiet* with `use-package` and `:vc` (Emacs >= 30):
+
+``` emacs-lisp
+(use-package be-quiet
+  :ensure t
+  :vc (:url "https://github.com/jamescherti/be-quiet.el"
+       :rev :newest))
+```
+
+### Doom Emacs
+
+Here is how to install *be-quiet* on Doom Emacs:
+
+1. Add to the `~/.doom.d/packages.el` file:
+```elisp
+(package! be-quiet
+  :recipe
+  (:host github :repo "jamescherti/be-quiet.el"))
+```
+
+2. Add to `~/.doom.d/config.el`:
+```elisp
+(after! be-quiet
+  ;; TODO: Add setq options here
+  )
+```
+
+3. Run the `doom sync` command:
+```
+doom sync
 ```
 
 ## Usage
