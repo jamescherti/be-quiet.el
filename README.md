@@ -70,7 +70,7 @@ The simplest way to use the `be-quiet` macro is as follows:
 The `be-quiet` macro silences specific function calls while allowing you to capture their output. For example:
 ```elisp
 (let (output) (be-quiet (message "Foo")
-                        (setq output (be-quiet-current-output)))
+                        (setq output (be-quiet-output)))
   (message "This was the last message: %s" output))
 ```
 
@@ -110,6 +110,8 @@ The *be-quiet* package offers the same core functionality as *shut-up*, but with
 - Provides new functions: `be-quiet-advice-add` and `be-quiet-advice-remove`
 - Ensures internal helper functions are properly marked as internal
 - Fixes byte-compiler warnings and other issues and improves docstrings for clarity and completeness
+- Fix bug: Kill the temporary buffer created by the `be-quiet` macro when `be-quiet-disable` is non-nil (unlike `shut-up`, which leaves the buffer behind when `shut-up-ignore` is non-nil)
+- Fix bug: Do not set `inhibit-message` to `t` when `be-quiet-disable` is non-nil (unlike `shut-up`, which sets it regardless of the value of `shut-up-ignore`)
 
 ## License
 
