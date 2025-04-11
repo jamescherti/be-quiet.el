@@ -30,8 +30,9 @@
 ;; Boston, MA 02110-1301, USA.
 
 ;;; Commentary:
-;; be-quiet.el is an Emacs package designed to minimize unwanted output,
-;; particularly useful for Emacs shell scripts.
+;; The be-quiet Emacs package helps manage and minimize unwanted output in your
+;; Emacs environment. It is useful in contexts where controlling or suppressing
+;; verbosity is required.
 
 ;;; Code:
 
