@@ -35,9 +35,6 @@
 
 (require 'cl-lib)
 
-(unless (boundp 'inhibit-message)
-  (setq inhibit-message nil))
-
 ;;; Variables
 
 (defgroup be-quiet nil
