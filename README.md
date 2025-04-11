@@ -22,7 +22,7 @@ To install *be-quiet* with `straight.el`:
              :repo "jamescherti/be-quiet.el"))
 ```
 
-### Emacs: Installing with use-package and :vc (Built-in feature in Emacs version >= 30)
+### Alternative installation: use-package and :vc (Built-in feature in Emacs version >= 30)
 
 To install *be-quiet* with `use-package` and `:vc` (Emacs >= 30):
 
@@ -33,7 +33,7 @@ To install *be-quiet* with `use-package` and `:vc` (Emacs >= 30):
        :rev :newest))
 ```
 
-### Doom Emacs
+### Alternative installation 2: Doom Emacs
 
 Here is how to install *be-quiet* on Doom Emacs:
 
