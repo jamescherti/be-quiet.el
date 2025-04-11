@@ -123,7 +123,7 @@
         (should (s-ends-with? "foo" (be-quiet-current-output)))))
     (should (string= (buffer-string) "")))
   (with-temp-buffer
-    (let ((be-quiet-ignore t)
+    (let ((be-quiet-disable t)
           (standard-output (current-buffer)))
       (be-quiet
         (princ "foo")
