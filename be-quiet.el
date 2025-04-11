@@ -190,20 +190,15 @@ If `be-quiet-disable' is non-nil, the function behaves like a normal `apply'."
            ((symbol-function 'load) #'be-quiet--load))
         (apply fn args)))))
 
-(defun be-quiet--around-advice (orig-fn &rest args)
-  "Advise function to suppress any output of the ORIG-FN function.
-ARGS are the ORIG-FN function arguments."
-  (apply #'be-quiet-funcall orig-fn args))
-
 ;;;###autoload
 (defun be-quiet-advice-add (fn)
   "Advise the FN function to be quiet."
-  (advice-add fn :around #'be-quiet--around-advice))
+  (advice-add fn :around #'be-quiet-funcall))
 
 ;;;###autoload
 (defun be-quiet-advice-remove (fn)
   "Remove silence advice from the FN function."
-  (advice-remove fn #'be-quiet--around-advice))
+  (advice-remove fn #'be-quiet-funcall))
 
 (provide 'be-quiet)
 
