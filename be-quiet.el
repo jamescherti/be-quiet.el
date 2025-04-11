@@ -5,7 +5,7 @@
 ;; Copyright (C) 2014, 2015  Sebastian Wiesner <swiesner@lunaryorn.com>
 
 ;; Author: James Cherti | https://www.jamescherti.com/contact/
-;; Package-Requires: ((cl-lib "0.3") (emacs "24.4"))
+;; Package-Requires: ((emacs "24.4"))
 ;; Keywords: convenience
 ;; Version: 1.0.2
 ;; URL: https://github.com/jamescherti/be-quiet.el
@@ -168,15 +168,36 @@ the current contents of `be-quiet-sink' when called with no arguments."
        (and (buffer-live-p be-quiet-sink)
             (kill-buffer be-quiet-sink)))))
 
+;;;###autoload
+(defun be-quiet-funcall (fn &rest args)
+  "Call FN with ARGS while suppressing all output.
+
+This function evaluates FN with the given ARGS while redirecting output that
+would normally be sent to `standard-output' and suppressing messages produced by
+`message'. It also overrides `write-region' and `load' with custom
+implementations that prevent unintended output.
+
+If `be-quiet-disable' is non-nil, the function behaves like a normal `apply'."
+  (if be-quiet-disable
+      (apply fn args)
+    (let ((inhibit-message t))
+      (cl-letf
+          ;; Override `standard-output' (for `print'), `message',
+          ;; `write-region', `load'.
+          ((standard-output #'ignore)
+           ((symbol-function 'message) #'ignore)
+           ((symbol-function 'write-region) #'be-quiet--write-region)
+           ((symbol-function 'load) #'be-quiet--load))
+        (apply fn args)))))
+
 (defun be-quiet--around-advice (orig-fn &rest args)
   "Advise function to suppress any output of the ORIG-FN function.
-ARGS are the ORIG_-FN function arguments."
-  (be-quiet
-    (apply orig-fn args)))
+ARGS are the ORIG-FN function arguments."
+  (apply #'be-quiet-funcall orig-fn args))
 
 ;;;###autoload
 (defun be-quiet-advice-add (fn)
-  "Advise the the FN function to be quiet."
+  "Advise the FN function to be quiet."
   (advice-add fn :around #'be-quiet--around-advice))
 
 ;;;###autoload

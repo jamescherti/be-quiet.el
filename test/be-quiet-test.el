@@ -123,7 +123,7 @@
         (should (s-ends-with? "foo" (be-quiet-current-output)))))
     (should (string= (buffer-string) "")))
   (with-temp-buffer
-    (let ((be-quiet-ignore t)
+    (let ((be-quiet-disable t)
           (standard-output (current-buffer)))
       (be-quiet
         (princ "foo")
@@ -142,7 +142,6 @@
 
 (ert-deftest be-quiet/add-remove-advice ()
   "Test adding and removing the `be-quiet' advice."
-
   ;; Verify that no advice is present initially
   (should (equal (advice-member-p #'be-quiet--around-advice
                                   #'be-quiet/test-function-advice)
@@ -163,6 +162,23 @@
   (should (equal (advice-member-p #'be-quiet--around-advice
                                   #'be-quiet/test-function-advice)
                  nil)))
+
+(ert-deftest be-quiet/funcall ()
+  "Test `be-quiet-funcall'."
+  (message "world4hello5")
+  (be-quiet-funcall
+   (lambda() (message "Hello1world2")))
+  (with-current-buffer "*Messages*"
+    (save-excursion
+      (should-not
+       (progn
+         (goto-char (point-min))
+         (re-search-forward "Hello1world2" nil t)))
+
+      (should
+       (progn
+         (goto-char (point-min))
+         (re-search-forward "world4hello5" nil t))))))
 
 (provide 'be-quiet-test)
 ;;; be-quiet-test.el ends here

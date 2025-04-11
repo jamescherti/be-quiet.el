@@ -94,6 +94,16 @@ Here is another example to prevent `recentf` from showing messages during saving
   (be-quiet-advice-add #'recentf-cleanup))
 ```
 
+### The `be-quiet-funcall` function
+
+Use `be-quiet-funcall` when you want to invoke a function while suppressing all output, including messages and printed text. For instance, to call `message` without displaying anything:
+
+```elisp
+(be-quiet-funcall 'message "You won't see this")
+```
+
+Unlike `be-quiet`, which is a macro and captures output in a temporary buffer for later inspection, `be-quiet-funcall` is a regular function that discards all output entirely. Use it when you do not need to capture or inspect the suppressed output.
+
 ## Frequently asked question
 
 ### Identifying Functions to Silence in Emacs
@@ -139,3 +149,4 @@ Other Emacs packages by the same author:
 - [flymake-bashate.el](https://github.com/jamescherti/flymake-bashate.el): A package that provides a Flymake backend for the bashate Bash script style checker.
 - [flymake-ansible-lint.el](https://github.com/jamescherti/flymake-ansible-lint.el): An Emacs package that offers a Flymake backend for ansible-lint.
 - [inhibit-mouse.el](https://github.com/jamescherti/inhibit-mouse.el): A package that disables mouse input in Emacs, offering a simpler and faster alternative to the disable-mouse package.
+- [enhanced-evil-paredit.el](https://github.com/jamescherti/enhanced-evil-paredit.el): An Emacs package that prevents parenthesis imbalance when using *evil-mode* with *paredit*. It intercepts *evil-mode* commands such as delete, change, and paste, blocking their execution if they would break the parenthetical structure.
