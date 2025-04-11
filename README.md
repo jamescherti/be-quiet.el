@@ -27,14 +27,14 @@ To install `be-quiet` with `straight.el`:
 ### The be-quiet macro
 
 The simplest way to use the `be-quiet` macro is as follows:
-``` lisp
+```elisp
 (be-quiet
   (message "You will not see this message")
   (message "You will also not see this message"))
 ```
 
 The `be-quiet` macro silences specific function calls while allowing you to capture their output. For example:
-```lisp
+```elisp
 (let (output) (be-quiet (message "Foo")
                         (setq output (be-quiet-current-output)))
   (message "This was the last message: %s" output))
@@ -47,14 +47,14 @@ In this example, the message "Foo" is silenced, but its output is captured and s
 To prevent certain functions from generating output, use the `be-quiet-advice-add` function.
 
 For instance, to disable the message "Indentation setup for shell type bash" when `sh-set-shell` is called:
-``` lisp
+```elisp
 (be-quiet-advice-add #'sh-set-shell)
 ```
 
 In this example, calling the `sh-set-shell` function will execute as usual without displaying any messages.
 
 Here is another example to prevent `recentf` from showing messages during saving and cleanup:
-```lisp
+```elisp
 (with-eval-after-load "recentf"
   (be-quiet-advice-add #'recentf-save-list)
   (be-quiet-advice-add #'recentf-cleanup))
@@ -66,7 +66,7 @@ Here is another example to prevent `recentf` from showing messages during saving
 
 In non-interactive sessions, you can further reduce output by using be-quiet-silence-emacs, which adjusts some global Emacs settings:
 
-```lisp
+```elisp
 (when noninteractive
   (setq dired-use-ls-dired nil)
   (remove-hook 'find-file-hook 'vc-find-file-hook))
@@ -75,7 +75,7 @@ In non-interactive sessions, you can further reduce output by using be-quiet-sil
 ### Identifying Functions to Silence in Emacs
 
 You can assign a regular expression to the variable `debug-on-message` by adding the following line early in your Emacs init files. This will cause Emacs to invoke the debugger when a matching message is displayed during Emacs startup:
-```lisp
+```elisp
 (setq debug-on-message "Regular expression")
 ```
 
