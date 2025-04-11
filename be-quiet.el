@@ -93,12 +93,6 @@ If BUFFER is not live, do nothing."
         (string (insert object))
         (t (princ object #'insert-char))))))
 
-(defun be-quiet--around-advice (orig-fn &rest args)
-  "Advise function to suppress any output of the ORIG-FN function.
-ARGS are the ORIG_-FN function arguments."
-  (be-quiet
-    (apply orig-fn args)))
-
 ;;; Functions
 
 ;;;###autoload
@@ -143,6 +137,12 @@ suppression."
                ,@body)
            (and (buffer-name be-quiet-sink)
                 (kill-buffer be-quiet-sink)))))))
+
+(defun be-quiet--around-advice (orig-fn &rest args)
+  "Advise function to suppress any output of the ORIG-FN function.
+ARGS are the ORIG_-FN function arguments."
+  (be-quiet
+    (apply orig-fn args)))
 
 ;;;###autoload
 (defun be-quiet-advice-add (fn)
