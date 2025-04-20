@@ -15,7 +15,7 @@
 #
 
 name: CI
-on: [push, pull_request]  # yamllint disable-line rule:truthy
+on: pull_request
 
 jobs:
   test:
