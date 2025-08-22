@@ -131,7 +131,7 @@ The following types of output are suppressed:
 Inside BODY, the buffer is bound to the lexical variable `be-quiet-sink'.
 Additionally provide a lexical function `be-quiet-current-output', which returns
 the current contents of `be-quiet-sink' when called with no arguments."
-  (declare (indent 0))
+  (declare (indent 0) (debug t))
   `(let ((be-quiet-sink (generate-new-buffer " *be-quiet*")))
      (unwind-protect
          (cl-labels ((be-quiet-output ()
