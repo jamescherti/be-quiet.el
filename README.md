@@ -1,7 +1,7 @@
 # be-quiet.el - Emacs, be quiet!
 ![Build Status](https://github.com/jamescherti/easysession.el/actions/workflows/ci.yml/badge.svg)
 ![License](https://img.shields.io/github/license/jamescherti/be-quiet.el)
-![](https://raw.githubusercontent.com/jamescherti/be-quiet.el/master/.images/made-for-gnu-emacs.svg)
+![](https://jamescherti.com/misc/made-for-gnu-emacs.svg)
 
 The `be-quiet` Emacs package helps manage and minimize unwanted output in your Emacs environment. It is useful in contexts where controlling or suppressing verbosity is required.
 
