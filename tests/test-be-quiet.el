@@ -1,6 +1,6 @@
 ;;; be-quiet-test.el --- Test suite for be-quiet       -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2024-2025 James Cherti | https://www.jamescherti.com/contact/
+;; Copyright (C) 2024-2026 James Cherti | https://www.jamescherti.com/contact/
 ;; Copyright (C) 2013-2014 Johan Andersson <johan.rejeep@gmail.com>
 ;; Copyright (C) 2014, 2015  Sebastian Wiesner <swiesner@lunaryorn.com>
 

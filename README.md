@@ -126,7 +126,7 @@ The *be-quiet* package offers the same core functionality as *shut-up*, but with
 
 ## License
 
-- Copyright (C) 2024-2025 [James Cherti](https://www.jamescherti.com)
+- Copyright (C) 2024-2026 [James Cherti](https://www.jamescherti.com)
 - Copyright (C) 2013-2014 Johan Andersson
 - Copyright (C) 2014-2015 Sebastian Wiesner
 
