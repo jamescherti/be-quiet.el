@@ -4,7 +4,7 @@
 ;; Copyright (C) 2013-2014 Johan Andersson <johan.rejeep@gmail.com>
 ;; Copyright (C) 2014, 2015  Sebastian Wiesner <swiesner@lunaryorn.com>
 
-;; Author: James Cherti | https://www.jamescherti.com/contact/
+;; Author: James Cherti <https://www.jamescherti.com/contact/>
 ;; URL: https://github.com/jamescherti/be-quiet.el
 
 ;; This file is free software; you can redistribute it and/or modify
