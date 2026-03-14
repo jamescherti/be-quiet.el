@@ -15,7 +15,6 @@ To install *be-quiet* with `straight.el`:
 2. Add the following code to the Emacs init file:
 ```emacs-lisp
 (use-package be-quiet
-  :ensure t
   :straight (be-quiet
              :type git
              :host github
@@ -28,7 +27,6 @@ To install *be-quiet* with `use-package` and `:vc` (Emacs >= 30):
 
 ``` emacs-lisp
 (use-package be-quiet
-  :ensure t
   :vc (:url "https://github.com/jamescherti/be-quiet.el"
        :rev :newest))
 ```
