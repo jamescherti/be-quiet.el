@@ -7,7 +7,7 @@
 ;; Author: James Cherti <https://www.jamescherti.com/contact/>
 ;; Package-Requires: ((emacs "24.4"))
 ;; Keywords: convenience
-;; Version: 1.0.2
+;; Version: 1.0.3
 ;; URL: https://github.com/jamescherti/be-quiet.el
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 
