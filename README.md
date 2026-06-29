@@ -1,5 +1,5 @@
 # be-quiet.el - Emacs, be quiet!
-![Build Status](https://github.com/jamescherti/easysession.el/actions/workflows/ci.yml/badge.svg)
+![Build Status](https://github.com/jamescherti/easysession.el/actions/workflows/melpazoid.yml/badge.svg)
 ![License](https://img.shields.io/github/license/jamescherti/be-quiet.el)
 ![](https://jamescherti.com/misc/made-for-gnu-emacs.svg)
 
