@@ -87,7 +87,7 @@ In this example, calling the `sh-set-shell` function will execute as usual witho
 
 Here is another example to prevent `recentf` from showing messages during saving and cleanup:
 ```elisp
-(with-eval-after-load "recentf"
+(with-eval-after-load 'recentf
   (be-quiet-advice-add #'recentf-save-list)
   (be-quiet-advice-add #'recentf-cleanup))
 ```
