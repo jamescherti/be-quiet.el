@@ -39,7 +39,7 @@
 
 (defgroup be-quiet nil
   "Emacs, be quiet!"
-  :group 'be-quiet
+  :group 'convenience
   :prefix "be-quiet-")
 
 (define-obsolete-variable-alias
