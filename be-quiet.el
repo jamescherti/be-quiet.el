@@ -7,7 +7,7 @@
 ;; Author: James Cherti <https://www.jamescherti.com/contact/>
 ;; Package-Requires: ((emacs "24.4"))
 ;; Keywords: convenience
-;; Version: 1.0.3
+;; Version: 1.0.4
 ;; URL: https://github.com/jamescherti/be-quiet.el
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -44,7 +44,7 @@
 
 (define-obsolete-variable-alias
   'be-quiet-ignore
-  'be-quiet-disable "1.0.3"
+  'be-quiet-disable "1.0.4"
   "Obsolete. Use `be-quiet-disable' instead.")
 
 (defvar be-quiet-disable nil
