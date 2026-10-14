@@ -11,7 +11,7 @@ The `be-quiet` Emacs package helps manage and minimize unwanted output in your E
 
 To install *be-quiet* with `straight.el`:
 
-1. It if hasn't already been done, [add the straight.el bootstrap code](https://github.com/radian-software/straight.el?tab=readme-ov-file#getting-started) to your init file.
+1. If it hasn't already been done, [add the straight.el bootstrap code](https://github.com/radian-software/straight.el?tab=readme-ov-file#getting-started) to your init file.
 2. Add the following code to the Emacs init file:
 ```emacs-lisp
 (use-package be-quiet
