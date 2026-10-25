@@ -3,7 +3,10 @@
 ![License](https://img.shields.io/github/license/jamescherti/be-quiet.el)
 ![](https://jamescherti.com/misc/made-for-gnu-emacs.svg)
 
-The `be-quiet` Emacs package helps manage and minimize unwanted output in your Emacs environment. It is useful in contexts where controlling or suppressing verbosity is required.
+- Author: James Cherti <[https://www.jamescherti.com/](https://www.jamescherti.com/)>
+- License: GPL
+
+The **[be-quiet](https://github.com/jamescherti/be-quiet.el)** Emacs package helps manage and minimize unwanted output in your Emacs environment. It is useful in contexts where controlling or suppressing verbosity is required.
 
 ## Installation
 
