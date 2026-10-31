@@ -27,7 +27,6 @@
 ;;; Code:
 
 (require 'be-quiet)
-(require 's)
 
 (defun be-quiet-test-message-shown-p (message)
   "Determine whether MESSAGE was shown in the messages buffer."
@@ -49,8 +48,8 @@
     (message "This message shall be hidden")
     ;; Cannot use string equality because Emacs 24.3 prints message
     ;; "ad-handle-definition: `message' got redefined".
-    (should (s-ends-with? "This message shall be hidden\n"
-                          (be-quiet-current-output)))
+    (should (string-suffix-p "This message shall be hidden\n"
+                             (be-quiet-current-output)))
     (should-not (be-quiet-test-message-shown-p "This message shall be hidden")))
   ;; Test that `message' is properly restored
   (message "This message shall be visible again")
@@ -59,7 +58,7 @@
 (ert-deftest be-quiet/handles-message-with-nil-argument ()
   (be-quiet
     (message nil)
-    (should (s-blank? (be-quiet-current-output)))))
+    (should (string= (be-quiet-current-output) ""))))
 
 (ert-deftest be-quiet/silences-princ ()
   (with-temp-buffer
@@ -70,8 +69,8 @@
         (princ "This text is hidden. ")
         ;; Cannot use string equality because Emacs 24.3 prints message
         ;; "ad-handle-definition: `message' got redefined".
-        (should (s-ends-with? "This text is hidden. "
-                              (be-quiet-current-output)))
+        (should (string-suffix-p "This text is hidden. "
+                                 (be-quiet-current-output)))
         (should (string= "This text is visible. " (buffer-string))))
       (princ "This text is visible again.")
       (should (string= "This text is visible. This text is visible again."
@@ -95,8 +94,8 @@
       ;; Can not do strict equality because in Emacs-23 this message
       ;; is printed:
       ;; "This `cl-labels' requires `lexical-binding' to be non-nil"
-      (should (s-contains? "Start\n" (buffer-string)))
-      (should (s-contains? "Done\n" (buffer-string)))
+      (should (string-match-p (regexp-quote "Start\n") (buffer-string)))
+      (should (string-match-p (regexp-quote "Done\n") (buffer-string)))
       ;; Test that the overridden be-quiet did it's work actually
       (with-temp-buffer
         (insert-file-contents temp-file)
@@ -120,14 +119,14 @@
     (let ((standard-output (current-buffer)))
       (be-quiet
         (princ "foo")
-        (should (s-ends-with? "foo" (be-quiet-current-output)))))
+        (should (string-suffix-p "foo" (be-quiet-current-output)))))
     (should (string= (buffer-string) "")))
   (with-temp-buffer
     (let ((be-quiet-disable t)
           (standard-output (current-buffer)))
       (be-quiet
         (princ "foo")
-        (should-not (s-ends-with? "foo" (be-quiet-current-output)))))
+        (should-not (string-suffix-p "foo" (be-quiet-current-output)))))
     (should (string= (buffer-string) "foo"))))
 
 (ert-deftest be-quiet/message-return-value ()
